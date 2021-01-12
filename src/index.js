@@ -29,6 +29,13 @@ function Image(props) {
 //   );
 // }
 class MovieItem extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      show: false
+    };
+  }
+
   render() {
     console.log(this);
     const {
@@ -39,6 +46,18 @@ class MovieItem extends React.Component {
         <Image src={image} alt={alttitle} />
         <p>{title}</p>
         <p>{averagescore}</p>
+        <button
+          type="button"
+          onClick={() => {
+            console.log("state =", this.state);
+            this.setState({
+              show: true
+            });
+          }}
+        >
+          show
+        </button>
+        {this.state.show ? <p>{overwiev}</p> : null}
       </div>
     );
   }
@@ -60,8 +79,8 @@ ReactDOM.render(
   rootElement
 );
 
-// Назначить Мувиайтему дату из конст
-// Destruct в Мувиайтеме для лаконичности
-// Вівести изображение и создать функцию изображения
-// Дать консол лог для обоих функций
-// создать класс для Мувиайтема
+//создать конструктор и супер
+//создать кнопку
+//Прописать стейт в конструкторе
+//Прописать условие при котором кнопка показывает содержимое
+//онклик на изменение состояния
