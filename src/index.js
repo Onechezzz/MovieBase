@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./index.css";
 
 const movie = {
   title: "JOJO",
@@ -11,7 +12,7 @@ const movie = {
 };
 function Image(props) {
   console.log("Image", props);
-  return <img src={props.image} alt={props.alt} />;
+  return <img width="100%" src={props.image} alt={props.alt} />;
 }
 
 // function MovieItem(props) {
@@ -28,13 +29,27 @@ function Image(props) {
 //     </div>
 //   );
 // }
+
 class MovieItem extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      show: false,
+      like: false
     };
   }
+
+  toggleOverwiev = () => {
+    // console.log("state =", this.state);
+    this.setState({
+      show: !this.state.show
+    });
+  };
+  handleLike = () => {
+    this.setState({
+      like: !this.state.like
+    });
+  };
 
   render() {
     console.log(this);
@@ -46,18 +61,19 @@ class MovieItem extends React.Component {
         <Image src={image} alt={alttitle} />
         <p>{title}</p>
         <p>{averagescore}</p>
-        <button
-          type="button"
-          onClick={() => {
-            console.log("state =", this.state);
-            this.setState({
-              show: true
-            });
-          }}
-        >
-          show
-        </button>
-        {this.state.show ? <p>{overwiev}</p> : null}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <button type="button" onClick={this.toggleOverwiev}>
+            {this.state.show ? "hide" : "show"}
+          </button>
+          {this.state.show ? <p>{overwiev}</p> : null}
+          <button
+            type="button"
+            onClick={this.handleLike}
+            className={this.state.like ? "styleLike" : ""}
+          >
+            Like
+          </button>
+        </div>
       </div>
     );
   }
@@ -79,8 +95,9 @@ ReactDOM.render(
   rootElement
 );
 
-//создать конструктор и супер
-//создать кнопку
-//Прописать стейт в конструкторе
-//Прописать условие при котором кнопка показывает содержимое
-//онклик на изменение состояния
+//Добавить скрытие овервью
+//Перенести функцию отдельно
+//Сделать кнопку лайка
+//Стили применяются при смене стейта
+//Создать CSS
+//Подключить импорт
